@@ -4,6 +4,7 @@ import com.appengine.auth.annotation.AuthType;
 import com.appengine.auth.annotation.BaseInfo;
 import com.appengine.user.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,13 +22,13 @@ public class WebUserController {
     private UserService userService;
 
     @BaseInfo(needAuth = AuthType.OPTION)
-    @RequestMapping(value = "register", method = RequestMethod.GET)
+    @GetMapping(value = "register")
     public String register() {
         return "account/register";
     }
 
     @BaseInfo(needAuth = AuthType.OPTION)
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @GetMapping(value = "login")
     public String login() {
         return "account/login";
     }
