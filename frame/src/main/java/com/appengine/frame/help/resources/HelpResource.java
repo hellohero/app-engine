@@ -8,6 +8,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.javasimon.aop.Monitored;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class HelpResource {
         return result;
     }
 
-    @RequestMapping(value = "/echo", method = RequestMethod.POST)
+    @PostMapping(value = "/echo")
     public JSONObject echo(@RequestParam String msg) {
         if (!DefaultProfileLoader.isProd()) {
             try {
