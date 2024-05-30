@@ -9,8 +9,8 @@ import com.appengine.common.exception.EngineExceptionHelper;
 import com.appengine.user.domain.User;
 import com.appengine.user.service.UserService;
 import com.appengine.user.utils.UserExcepFactor;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +27,7 @@ public class LoginController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @PostMapping(value = "")
     @BaseInfo(needAuth = AuthType.OPTION)
     public JSONObject add(@RequestParam String username, @RequestParam String password) {
         JSONObject result = new JSONObject(true);

@@ -7,8 +7,8 @@ import com.appengine.frame.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
@@ -27,7 +27,7 @@ public class ProxyResource {
     private static final Logger logger = LoggerFactory.getLogger(ProxyResource.class);
 
     @BaseInfo(desc = "代理url，种cookie", needAuth = AuthType.REQUIRED)
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String proxy(RequestContext rc, @RequestParam String url, HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieAuthSpi.COOKIE_NAME, CookieAuthSpi.generateCookie(rc.getCurrentUid()));
         cookie.setMaxAge((int) CookieAuthSpi.COOKIE_EXPIRES_TIME);

@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +30,7 @@ public class TaskController {
     @Resource
     private TaskService taskService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public Page<Task> list(
             RequestContext rc,
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -38,7 +40,7 @@ public class TaskController {
         return taskService.getTasksByPage(rc.getCurrentUid(), request);
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping(value = "/get")
     public Task get(@RequestParam("id") Long id) {
         Task task = taskService.getTask(id);
         if (task == null) {
@@ -49,7 +51,7 @@ public class TaskController {
         return task;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     public long save(RequestContext rc,
                      @RequestParam(required = false, defaultValue = "0") long id,
                      @RequestParam String title,
@@ -64,7 +66,7 @@ public class TaskController {
         return task.getId();
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/delete")
     public boolean delete(@RequestParam("id") Long id) {
         return taskService.deleteTask(id);
     }

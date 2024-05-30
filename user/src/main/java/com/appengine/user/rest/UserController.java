@@ -10,8 +10,8 @@ import com.appengine.auth.spi.MAuthSpi;
 import com.appengine.frame.context.RequestContext;
 import com.appengine.user.domain.User;
 import com.appengine.user.service.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +32,13 @@ public class UserController {
     private UserService userService;
 
     @BaseInfo(desc = "注册用户", needAuth = AuthType.OPTION)
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping(value = "/register")
     public boolean register(@RequestParam String username, @RequestParam String password) {
         return userService.save(new User(username, password));
     }
 
     @BaseInfo(desc = "登陆", needAuth = AuthType.OPTION)
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     public JSONObject login(
             HttpServletResponse response,
             @RequestParam String username,

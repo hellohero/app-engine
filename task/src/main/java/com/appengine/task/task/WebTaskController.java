@@ -4,8 +4,8 @@ import com.appengine.task.domain.Task;
 import com.appengine.task.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
@@ -24,12 +24,12 @@ public class WebTaskController {
     @Resource
     private TaskService taskService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String list() {
         return "task/list";
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.GET)
+    @GetMapping(value = "save")
     public String save(
             @RequestParam(required = false, defaultValue = "0") long id,
             Model model
